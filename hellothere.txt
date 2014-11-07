@@ -1,0 +1,7 @@
+{
+    "state": "AP",
+    "token": "AHAHAA&898798GAnnshasthsy98",
+    "ssid": "1stbuild",
+    "pass_phrase": "firstbuild",
+    "security_mode": "wpa2"
+}
