@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var Wireless = require('../index.js');
+var Wireless = require('./index.js');
 var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
