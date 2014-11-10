@@ -8,6 +8,10 @@ Some requirements:
 Pi configurations so that it immediately starts up running it's own WiFi AP and running a DHCP server so your client can join.
 - A raspberry pi with a WiFi USB device connected
 - A client that can execute http GET and POST requests to http://192.168.1.1
+- If you would like to test then you will need to build and run the daemon by building the daemon.c file
+    gcc -Wall daemon.c -o daemon
+- The daemon process will be running on the raspberry pi image provided so unless you want to edit that then there is no need
+build or update this.
 
 Design:
 - The overall theme in this design is for the raspberry pi to initially host it's own WiFi AP and web server so you can create
