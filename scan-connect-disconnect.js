@@ -14,7 +14,7 @@ var text = '{ "networks" : [' +
 '{ "ssid":"ulsecure" , "security":"wpa2" } ]}';
 
 var samplefilecontents = {"state" : "AP", "token" : "null", "ssid" : "null", "pass_phrase" : "null", "security_mode" : "null"};
-var readinfilecontents;
+var readinfilecontents = {"state" : "AP", "token" : "null", "ssid" : "null", "pass_phrase" : "null", "security_mode" : "null"};
 
 //JDD - just for testing right now
 //app.use('/test', express.static(__dirname + '/web'));
@@ -29,12 +29,18 @@ app.post('/networks', function(req, res){
 	console.log(req.body);
 	 res.send('Hi');
 	 
-	 samplefilecontents.state = req.body.state;
-	 samplefilecontents.ssid = req.body.ssid;
-	 samplefilecontents.pass_phrase = req.body.pass_phrase;
-	 samplefilecontents.security_mode = req.body.security_mode;
+	 fs.readFile("hellothere.txt", function(err, data){
+		 if(err) throw err;
+		 readinfilecontents = JSON.parse(data);
+		 console.log(readinfilecontents);
+	 });
 	 
-	 fs.writeFile("hellothere.txt", JSON.stringify(samplefilecontents, null, 4), function(err) {
+	 readinfilecontents.state = req.body.state;
+	 readinfilecontents.ssid = req.body.ssid;
+	 readinfilecontents.pass_phrase = req.body.pass_phrase;
+	 readinfilecontents.security_mode = req.body.security_mode;
+	 
+	 fs.writeFile("hellothere.txt", JSON.stringify(readinfilecontents, null, 4), function(err) {
 		    if(err) {
 		        console.log(err);
 		    } else {
@@ -42,11 +48,6 @@ app.post('/networks', function(req, res){
 		    }
 		});
 	 
-	 fs.readFile("hellothere.txt", function(err, data){
-		 if(err) throw err;
-		 readinfilecontents = JSON.parse(data);
-		 console.log(readinfilecontents);
-	 })
 });
 
 app.post('/token', function(req, res){
@@ -54,21 +55,22 @@ app.post('/token', function(req, res){
 	console.log(req.body);
 	 res.send('Hi');
 	 
-	 samplefilecontents.token = req.body.token;
+	 fs.readFile("hellothere.txt", function(err, data){
+		 if(err) throw err;
+		 readinfilecontents = JSON.parse(data);
+		 console.log(readinfilecontents);
+	 });
 	 
-	 fs.writeFile("hellothere.txt", JSON.stringify(samplefilecontents, null, 4), function(err) {
+	 readinfilecontents.token = req.body.token;
+	 
+	 fs.writeFile("hellothere.txt", JSON.stringify(readinfilecontents, null, 4), function(err) {
 		    if(err) {
 		        console.log(err);
 		    } else {
 		        console.log("The file was saved!");
 		    }
 		});
-	 
-	 fs.readFile("hellothere.txt", function(err, data){
-		 if(err) throw err;
-		 readinfilecontents = JSON.parse(data);
-		 console.log(readinfilecontents);
-	 })
+	
 });
 
 var server = app.listen(3000, function () {
