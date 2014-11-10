@@ -29,6 +29,7 @@ app.post('/networks', function(req, res){
 	console.log(req.body);
 	 res.send('Hi');
 	 
+	 samplefilecontents.state = req.body.state;
 	 samplefilecontents.ssid = req.body.ssid;
 	 samplefilecontents.pass_phrase = req.body.pass_phrase;
 	 samplefilecontents.security_mode = req.body.security_mode;
