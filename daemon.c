@@ -90,7 +90,6 @@ int main(int argc, char* argv[])
 		current_state = getJSON_ElementString(state_string, buffer);
 		if(0 == strncmp(current_state, state_string_client, strlen(state_string_client)))
 		{
-			//printf("~~~~~~~~~ State changed to client mode!!~~~~~~~~~~~~~~~\r\n");
 			fprintf(fp_log, "~~~~~~~~~ State changed to client mode!!~~~~~~~~~~~~~~~\n");
 		}
 
