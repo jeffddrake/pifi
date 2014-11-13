@@ -60,19 +60,19 @@ int main(int argc, char* argv[])
 	fseek(fp_commissioning, SEEK_SET, 0);
 
 	// Close stdin. stdout and stderr
-//	close(STDIN_FILENO);
-//	close(STDOUT_FILENO);
-//	close(STDERR_FILENO);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 
 	fread(buffer, 1, 500, fp_commissioning);
 	fprintf(fp_log, buffer);
 
 
-	printf("Here is our state element [%s]\r\n", getJSON_ElementString(state_string, buffer));
-	printf("Here is our token element [%s]\r\n", getJSON_ElementString(token_string, buffer));
-	printf("Here is our ssid element [%s]\r\n", getJSON_ElementString(ssid_string, buffer));
-	printf("Here is our pass_phrase element [%s]\r\n", getJSON_ElementString(pass_phrase_string, buffer));
-	printf("Here is our security_mode element [%s]\r\n", getJSON_ElementString(security_mode_string, buffer));
+//	printf("Here is our state element [%s]\r\n", getJSON_ElementString(state_string, buffer));
+//	printf("Here is our token element [%s]\r\n", getJSON_ElementString(token_string, buffer));
+//	printf("Here is our ssid element [%s]\r\n", getJSON_ElementString(ssid_string, buffer));
+//	printf("Here is our pass_phrase element [%s]\r\n", getJSON_ElementString(pass_phrase_string, buffer));
+//	printf("Here is our security_mode element [%s]\r\n", getJSON_ElementString(security_mode_string, buffer));
 
 	char * current_state = NULL;
 
@@ -80,11 +80,12 @@ int main(int argc, char* argv[])
 	{
 		//Dont block context switches, let the process sleep for some time
 		sleep(1);
-		fprintf(fp_log, "Logging info...\n");
-		fflush(fp_log);
+		//fprintf(fp_log, "Logging info...\n");
+		//fflush(fp_log);
 		fp_commissioning = fopen ("hellothere.txt", "r+");
 		fseek(fp_commissioning, SEEK_SET, 0);
 		fread(buffer, 1, 500, fp_commissioning);
+		fclose(fp_commissioning);
 
 		current_state = getJSON_ElementString(state_string, buffer);
 		if(0 == strncmp(current_state, state_string_client, strlen(state_string_client)))
@@ -97,6 +98,7 @@ int main(int argc, char* argv[])
 	}
 
 	fclose(fp_log);
+	fclose(fp_commissioning);
 	return (0);
 }
 
